@@ -2,7 +2,6 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-// I AM NOT DONE
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
@@ -29,13 +28,13 @@ struct LinkedList<T> {
     end: Option<NonNull<Node<T>>>,
 }
 
-impl<T> Default for LinkedList<T> {
+impl<T: PartialOrd> Default for LinkedList<T> {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T> LinkedList<T> {
+impl<T: PartialOrd> LinkedList<T> {
     pub fn new() -> Self {
         Self {
             length: 0,
@@ -69,14 +68,61 @@ impl<T> LinkedList<T> {
             },
         }
     }
+
+    fn push_node(&mut self, mut node: NonNull<Node<T>>) 
+    {
+        unsafe {
+            node.as_mut().next = None;
+            match self.end {
+                None => self.start = Some(node),
+                Some(mut end) => {
+                    (*end.as_ptr()).next = Some(node);
+                },
+            }
+        };
+            self.end = Some(node);
+            self.length += 1;
+    }
+
 	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
 	{
 		//TODO
-		Self {
-            length: 0,
-            start: None,
-            end: None,
+        let a_len = list_a.length;
+        let b_len = list_b.length;
+        if a_len == 0 && b_len == 0 {
+            return Self {
+                length: 0,
+                start: None,
+                end: None,
+            };
+        } 
+        let mut ret = LinkedList::new();
+        let mut a = list_a.start;
+        let mut b = list_b.start;
+        while let (Some(a_ptr), Some(b_ptr)) = (a, b) {
+            unsafe {
+                if a_ptr.as_ref().val <= b_ptr.as_ref().val {
+                    a = a_ptr.as_ref().next;
+                    ret.push_node(a_ptr);
+                } else {
+                    b = b_ptr.as_ref().next;
+                    ret.push_node(b_ptr);
+                }
+            }
         }
+        while let Some(a_ptr) = a {
+            unsafe {
+                a = a_ptr.as_ref().next;
+                ret.push_node(a_ptr);
+            }
+        }
+        while let Some(b_ptr) = b {
+            unsafe {
+                b = b_ptr.as_ref().next;
+                ret.push_node(b_ptr);
+            }
+        }
+        ret
 	}
 }
 
