@@ -25,17 +25,19 @@
 // module Foo. the `my_demo_function_alias` is an alias for `my_demo_function`, so the two
 // line of code in the testcase should call the same function.
 //
-// You should NOT modify any existing code except for adding two lines of attributes.
+// You should NOT modify any existing code except for adding two lines of attributes. 
 
-// I AM NOT DONE
 
 extern "Rust" {
     fn my_demo_function(a: u32) -> u32;
+    #[link_name="my_demo_function"]         // point this func to its alias
     fn my_demo_function_alias(a: u32) -> u32;
 }
 
 mod Foo {
     // No `extern` equals `extern "Rust"`.
+    #[no_mangle]                            // rustc will change func name when mangling, so first
+                                            // we should declare that we dont need it
     fn my_demo_function(a: u32) -> u32 {
         a
     }
