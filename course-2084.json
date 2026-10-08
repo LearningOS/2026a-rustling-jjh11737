@@ -2,8 +2,8 @@
   "schema": 1,
   "courseId": 2084,
   "repository": "LearningOS/2026a-rustling-jjh11737",
-  "commit": "5db7e90a12bc289dee62f494bc663b0f62d79282",
-  "score": 97,
+  "commit": "95c1911791e2b35cff58f3ed59f86cce095b28bb",
+  "score": 101,
   "totalScore": 110,
   "exercises": [
     {
@@ -653,23 +653,23 @@
     {
       "name": "from_str",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "try_from_into",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "as_ref_mut",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "tests5",
@@ -709,9 +709,9 @@
     {
       "name": "algorithm1",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "algorithm2",
@@ -778,9 +778,9 @@
     }
   ],
   "student": "jjh11737",
-  "runId": "37769493378",
+  "runId": "37781546078",
   "runAttempt": "1",
   "upload": {
-    "status": "accepted"
+    "status": "pending"
   }
 }
